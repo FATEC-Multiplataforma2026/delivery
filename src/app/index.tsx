@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native';
+import Button from '@/components/button';
 
 export default function Index() {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Hello, World!</Text>
+            <Button title="Click Me!" />
         </View>
     )
 }
