@@ -1,13 +1,23 @@
-import {StyleSheet} from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
+import { Colors } from '@/constants/colors';
 
-export const styles = StyleSheet.create({
+const isWeb = Platform.OS === 'web';
+
+export const Styles = StyleSheet.create({
     input: {
         width: '100%',
-        height: 52,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#121214',
-        padding: 12,
-        fontSize: 16,
-    }
-})
+        height: isWeb ? 52 : 48,
+        borderRadius: isWeb ? 12 : 10,
+        borderWidth: 1.5,
+        borderColor: Colors.whiteAlpha['12'],
+        backgroundColor: Colors.whiteAlpha['05'],
+        padding: 14,
+        fontSize: isWeb ? 15 : 14,
+        color: Colors.white,
+        ...Platform.select({
+            web: {
+                outlineColor: Colors.btnPrimary,
+            } as any,
+        }),
+    },
+});

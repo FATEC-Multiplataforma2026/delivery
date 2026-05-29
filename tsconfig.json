@@ -3,12 +3,17 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@types/*": ["./src/@types/*"],
+      "@/*": [
+        "./src/*"
+      ],
+      "@types/*": [
+        "./src/@types/*"
+      ]
     }
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "declarations.d.ts"
   ]
 }

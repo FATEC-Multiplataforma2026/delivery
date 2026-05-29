@@ -1,5 +1,5 @@
 import { TextInput, TextInputProps } from "react-native"
-import { styles } from "./styles";
+import { Styles } from "./styles";
 
 type Props = TextInputProps & {
     placeholder: string;
@@ -8,7 +8,7 @@ type Props = TextInputProps & {
 export function Input({...rest}: Props) {
     return (
         <TextInput
-            style={styles.input}
+            style={Styles.input}
             {...rest}
         />
     )
