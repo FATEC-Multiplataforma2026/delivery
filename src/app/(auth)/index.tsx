@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
+import { useAuth } from '@/context/AuthContext';
 
 import {
     View,
@@ -10,7 +11,7 @@ import {
     ScrollView,
 } from 'react-native';
 
-import  Button from '@/components/button';
+import Button from '@/components/button';
 import { Input } from '@/components/input';
 import { Pokeball } from '@/components/pokeball';
 import { PokeballLoading } from '@/components/pokeball-loading';
@@ -28,6 +29,9 @@ export default function Index() {
         type: 'error' as 'success' | 'error' | 'warning' | 'info',
     });
 
+    const { signIn } = useAuth();
+    const { signOut } = useAuth();
+
     function validateCredentials() {
         if (!name.trim() || !senha.trim()) {
             setAlertData({
@@ -38,10 +42,22 @@ export default function Index() {
             setIsAlertVisible(true);
             return;
         }
-        
-        if(name == 'admin' && senha == 'admin') {
+
+        const success = signIn(name, senha);
+
+        if (success) {
             setIsLoading(true);
-            router.push('/pokedex');
+            setTimeout(() => {
+                router.push('/pokedex');
+            }, 5000);
+        } else {
+            setAlertData({
+                title: 'Acesso negado',
+                message: 'Nome ou senha incorretos. Tente novamente.',
+                type: 'error',
+            });
+            setIsAlertVisible(true);
+            return signOut();
         }
     }
 
